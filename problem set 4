@@ -1,0 +1,27 @@
+from pandas import *
+from ggplot import *
+
+
+def plot_weather_data(turnstile_weather):
+#   problem set 4.1
+    df = turnstile_weather
+    plot = ggplot(df, aes(x='Hour')) + geom_histogram(binwidth=1) +ggtitle('NYC Subway ridership by time of day') + xlab('Hour (24-hr)') + ylab('Entries')
+    return plot
+
+
+from pandas import *
+from ggplot import *
+
+def plot_weather_data(turnstile_weather):
+
+#   problem set 4.2
+
+    turnstile_weather = turnstile_weather[['Hour','ENTRIESn_hourly']]
+    grouped = turnstile_weather.groupby('Hour', as_index=False).mean()
+
+    plot = ggplot(grouped, aes('Hour','ENTRIESn_hourly'))  + \
+           geom_bar(stat='bar', colour="yellow", fill='lightgreen') + \
+           ggtitle('Average Entry Hourly')  + \
+           xlab('Hour') + ylab('Average Entries')
+    print plot
+
